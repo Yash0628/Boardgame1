@@ -4,35 +4,33 @@ metadata:
   name: boardgame-deployment
   namespace: boardgame
 spec:
-   replicas: 2
-   selectors:
-     matchLables:
-        app: boardgame
-   template: 
-      metadata:
-        labels: 
-          app: boardgame
-      spec: 
-        containers:
-        -  name: boadgame-container
-           image: yash354/broadgame.latest
-           ports:
-           - containerPort: 8080
-           imagePullPolicy: Always
-
+  replicas: 2
+  selector:
+    matchLabels:
+       app: boardgame
+  template:
+    metadata:
+      labels:
+       app: boardgame
+    spec:
+      containers:
+      - name: boadgame-container
+        image: yash354/broadgame.latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
 ---
-
 apiVersion: v1
-kind: service
+kind: Service
 metadata:
   name: boardgame-srvc
 spec:
-  selector: 
+  selector:
     app: boardgame
   ports:
-    - protocal: "TCP"
+    - protocol: "TCP"
       port: 80
-      targetPort: 8080 
+      targetPort: 8080
   type: LoadBalancer # type of the service.
   
 
